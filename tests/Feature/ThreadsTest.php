@@ -5,16 +5,18 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class ThreadsTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
-     * A basic test example.
+     * Browse threads
      *
      * @return void
      */
-    public function testBasicTest()
+    public function test_a_user_can_browse_threads()
     {
-        $response = $this->get('/');
+        $response = $this->get('/threads');
 
         $response->assertStatus(200);
     }
