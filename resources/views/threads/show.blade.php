@@ -27,8 +27,10 @@
                 @foreach($thread->replies as $reply)
                     <div class="card">
                         <div class="card-header">
-                            {{ $reply->user_id->name }}
-                            {{ $reply->created_at->diffForHumans() }}
+                            <a href="#">
+                                {{ $reply->user->name }}
+                            </a>
+                            ({{ $reply->created_at->diffForHumans() }})
                         </div>
                         <div class="card-body">
                             {{ $reply->body }}
