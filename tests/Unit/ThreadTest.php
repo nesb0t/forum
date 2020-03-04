@@ -18,6 +18,13 @@ class ThreadTest extends TestCase
         $this->thread = factory('App\Thread')->create();
     }
 
+    public function test_a_thread_can_generate_its_path()
+    {
+        $thread = create('App\Thread');
+
+        $this->assertEquals("/threads/{$thread->topic->slug}/{$thread->id}", $thread->path());
+    }
+
     public function test_a_thread_has_replies()
     {
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->replies);
@@ -36,5 +43,12 @@ class ThreadTest extends TestCase
         ]);
 
         $this->assertCount(1, $this->thread->replies);
+    }
+
+    public function test_a_thread_belongs_to_a_topic()
+    {
+        $thread = create('App\Thread');
+
+        $this->assertInstanceOf('App\Topic', $thread->topic);
     }
 }

@@ -11,28 +11,22 @@ class CreateThreadsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_an_unauthenticated_user_can_not_create_new_forum_threads()
+    public function test_guest_cannot_create_thread()
     {
         $this->expectException(AuthenticationException::class);
 
-        $thread = make('App\Thread');
-
-        $this->post('/threads', $thread->toArray());
-    }
-
-    public function test_an_unauthenticated_user_can_not_view_create_threads_page()
-    {
-        $this->expectException(AuthenticationException::class);
-
-        $this->get('/threads/create')
+        $this->get('/threads/topic/create')
             ->assertRedirect('/login');
+
+        $this->post('/threads')
+            ->assertRedirect('/login');;
     }
 
     public function test_an_authenticated_user_can_create_new_forum_threads()
     {
         $this->signIn();
 
-        $thread = make('App\Thread');
+        $thread = create('App\Thread');
 
         $this->post('/threads', $thread->toArray());
 

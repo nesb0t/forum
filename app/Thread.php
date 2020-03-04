@@ -12,7 +12,7 @@ class Thread extends Model
     {
         // Easy way to generate the path/URL for a thread
 
-        return '/threads/' . $this->id;
+        return "/threads/{$this->topic->slug}/{$this->id}";
     }
 
     public function replies()
@@ -23,6 +23,11 @@ class Thread extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
     }
 
     public function addReply($reply)

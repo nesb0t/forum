@@ -39,6 +39,9 @@ $factory->define(App\Thread::class, function($faker) {
         'user_id'   =>  function() {
             return factory('App\User')->create()->id;
         },
+        'topic_id'   =>  function() {
+            return factory('App\Topic')->create()->id;
+        },
         'title' => $faker->sentence,
         'body' => $faker->paragraph
     ];
@@ -53,5 +56,14 @@ $factory->define(App\Reply::class, function($faker) {
             return factory('App\Thread')->create()->id;
         },
         'body' => $faker->paragraph
+    ];
+});
+
+$factory->define(App\Topic::class, function($faker) {
+    $name = $faker->word;
+
+    return [
+        'name'      =>  $name,
+        'slug'      =>  $name
     ];
 });
