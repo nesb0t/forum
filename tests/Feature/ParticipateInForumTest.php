@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -13,9 +12,9 @@ class ParticipateInForumTest extends TestCase
 
     public function test_unauthenticated_user_may_not_participate_in_forum_threads()
     {
-        $this->expectException(AuthenticationException::class);
-
-        $this->post('/threads/1/replies', []);
+        $this->withExceptionHandling()
+            ->post('/threads/1/replies', [])
+            ->assertRedirect('/login');;
     }
 
     public function test_an_authenticated_user_may_participate_in_forum_threads()

@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -13,12 +12,12 @@ class CreateThreadsTest extends TestCase
 
     public function test_guest_cannot_create_thread()
     {
-        $this->expectException(AuthenticationException::class);
-
-        $this->get('/threads/topic/create')
+        $this->withExceptionHandling()
+            ->get('/threads/topic/create')
             ->assertRedirect('/login');
 
-        $this->post('/threads')
+        $this->withExceptionHandling()
+            ->post('/threads')
             ->assertRedirect('/login');;
     }
 
