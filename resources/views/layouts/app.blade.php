@@ -36,6 +36,18 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/threads">Threads</a>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                @foreach(\App\Topic::all() as $topic)
+                                    <a class="dropdown-item" href="/threads/{{ $topic->slug }}">{{ $topic->name }}</a>
+                                @endforeach
+                            </div>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

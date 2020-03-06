@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Thread;
+use App\Topic;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
@@ -15,11 +16,16 @@ class ThreadController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Topic $topic
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Topic $topic)
     {
-        $threads = Thread::latest()->get();
+        if($topic->exists) {
+            $threads = $topic->threads()->latest()->get();
+        } else {
+            $threads = Thread::latest()->get();
+        }
 
         return view('threads.index', compact('threads'));
     }

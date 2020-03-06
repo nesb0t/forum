@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/threads', 'ThreadController@index');
 Route::post('/threads', 'ThreadController@store');
+Route::get('/threads/{topic}', 'ThreadController@index');
 Route::get('/threads/{topic}/create', 'ThreadController@create');
 Route::get('/threads/{topic}/{thread}', 'ThreadController@show');
 Route::post('/threads/{topic}/{thread}/replies', 'ReplyController@store');
